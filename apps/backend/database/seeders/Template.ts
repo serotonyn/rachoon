@@ -21,16 +21,16 @@ export default class extends BaseSeeder {
 
     template.data = {
       colors: {
-        border: '#E6E9EF',
-        primary: '#179299',
+        border: '#F8F9FC',
+        primary: '#1F7A8C',
         bodyText: '#1E1E2E',
-        secondary: '#179299',
-        footerText: '#CDD6F4',
+        secondary: '#F56103',
+        footerText: '#022B3A',
         headerText: '#1E1E2E',
         footerBackground: '#1E1E2E',
-        headerBackground: '#E6E9EF',
+        headerBackground: '#F8F9FC',
         tableOddBackground: '#FFFFFF',
-        tableEvenBackground: '#E6E9EF',
+        tableEvenBackground: '#F8F9FC',
       },
       columns: { first: '', third: '', fourth: '', second: '' },
     }

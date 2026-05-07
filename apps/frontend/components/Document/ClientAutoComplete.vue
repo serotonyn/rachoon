@@ -19,7 +19,7 @@ const val = ref("");
     "
     :itemProjection="
       (item: Client) => {
-        return `${item.name}${item.number}${item.data.contactPerson.fullName}`;
+        return `${item.name}${item.number}${item.data.contactPerson?.fullName}`;
       }
     "
   >
@@ -30,7 +30,7 @@ const val = ref("");
           '<br /><small>' +
           slot.boldMatchText(slot.item.number) +
           '<br />' +
-          slot.boldMatchText(slot.item.data.contactPerson.fullName) +
+          slot.boldMatchText(slot.item.data.contactPerson?.fullName) +
           '</small>'
         "
       ></span>

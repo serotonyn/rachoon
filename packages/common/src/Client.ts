@@ -42,7 +42,7 @@ class Client {
   updatedAt: Date = new Date();
   data: ClientData = {
     address: { street: "", zip: "", city: "", country: "" },
-    info: { nif: "", nis: "", ai: "", addition: "" },
+    info: { rc: "", nif: "", nis: "", ai: "", tin: "", addition: "" },
     contactPerson: { fullName: "", email: "" },
     conditions: {
       earlyPayment: { days: null, discount: null },
@@ -69,13 +69,13 @@ class Client {
 
   public errors(): string[] {
     const e: string[] = [];
-    if (this.name === "") {
-      e.push("Name is required");
-    }
+    // if (this.name === "") {
+    //   e.push("Name is required");
+    // }
 
-    if (this.data.contactPerson.email == "") {
-      e.push("E-mail is required");
-    }
+    // if (this.data.contactPerson?.email == "") {
+    //   e.push("E-mail is required");
+    // }
 
     return e;
   }

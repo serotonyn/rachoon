@@ -22,7 +22,7 @@ export default class ClientValidator {
         rc: schema.string.optional(),
         addition: schema.string.optional(),
       }),
-      contactPerson: schema.object().members({
+      contactPerson: schema.object.optional().members({
         fullName: schema.string.optional(),
         email: schema.string([rules.email()]),
       }),

@@ -1,6 +1,6 @@
 export default {
 	default: `
-    <!DOCTYPE html>
+  <!DOCTYPE html>
     <html>
       <head>
         <meta charset="utf-8">
@@ -8,32 +8,26 @@ export default {
         <title>Invoice</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-print@1.0.0/css/bulma-print.css">
-        
+
         <style>
-    
+
           @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;600;700;800;900&display=swap');
           @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;600;700;800;900&display=swap');
-    
+
           @media print {
             @page {
               size: A4 portrait;
               margin: 0mm 0 0mm 0;
-              position: relative;  
-              
+              position: relative;
+
             }
-      
-      
+
             a[href]:after {
               display: none !important;
             }
-      
-            
-            
-      
+
           }
-  
-    
-  
+
         body, html {
           font-size:11pt;
           position: relative;
@@ -43,40 +37,40 @@ export default {
         }
 
         body, html, table tbody td {
-          color: {{organization.settings.style.colors.bodyText}}; 
+          color: {{template.data.colors.bodyText}};
         }
         .meta p, .positions .text {
           font-size: 10pt;
         }
-  
+
         header {
           position: fixed;
           top: 0;
           width: 100%;
           font-size: 8pt;
-          background-color: {{organization.settings.style.colors.headerBackground}} !important;
-          color: {{organization.settings.style.colors.headerText}} !important;
+          background-color: {{template.data.colors.headerBackground}} !important;
+          color: {{template.data.colors.headerText}} !important;
         }
-  
+
         #page > thead td, header {
           height: 25mm;
         }
-  
+
         #page > tfoot td, footer {
           height: 25mm;
         }
-  
+
         footer {
           position: fixed;
           bottom: 0;
           width: 100%;
           font-size: 8pt;
-          background-color: {{organization.settings.style.colors.footerBackground}} !important;
-          color: {{organization.settings.style.colors.footerText}} !important;
+          background-color: {{template.data.colors.footerBackground}} !important;
+          color: {{template.data.colors.footerText}} !important;
         }
-  
-        
-  
+
+
+
           main {
             font-family: "Roboto", arial, sans-serif;
           }
@@ -85,85 +79,85 @@ export default {
             padding-left: 10mm;
             padding-right: 10mm;
           }
-    
+
           h1{
             font-family: "Montserrat", arial, sans-serif;
             font-weight: 900;
-            color: {{organization.settings.style.colors.primary}} !important;
+            color: {{template.data.colors.primary}} !important;
           }
-    
+
           h2,h3,h4,h5,h6 {
             font-weight: 600;
-            color: {{organization.settings.style.colors.primary}} !important;
+            color: {{template.data.colors.primary}} !important;
           }
 
           .section {
             padding-top:5mm;
             padding-bottom: 5mm;
-            
+
           }
 
           header section, footer section {
             padding-left: 10mm;
             padding-right: 10mm;
           }
-  
-  
+
+
           .positions {
             margin-top: 30px;
           }
-  
-         
-    
+
+
+
           header #logo {
             width: auto;
             height: 15mm;
           }
-  
-  
-  
+
+
+
           .table thead td {
-            color: {{organization.settings.style.colors.primary}} !important;
+            color: {{template.data.colors.primary}} !important;
           }
           .table td {
-            border-color: {{organization.settings.style.colors.border}} !important;
+            border-color: {{template.data.colors.border}} !important;
           }
 
           table.positions tbody tr:nth-child(odd) td {
-            background:{{organization.settings.style.colors.tableOddBackground}};
+            background:{{template.data.colors.tableOddBackground}};
           }
 
           table.positions tbody tr:nth-child(even) td {
-            background: {{organization.settings.style.colors.tableEvenBackground}};
+            background: {{template.data.colors.tableEvenBackground}};
           }
-  
+
           hr {
-            background-color: {{organization.settings.style.colors.border}} !important;
+            background-color: {{template.data.colors.border}} !important;
           }
 
           .meta h3, .totals h4 {
-            color: {{organization.settings.style.colors.secondary}} !important;
+            color: {{template.data.colors.secondary}} !important;
           }
-  
+
           .page-number:after {
             content: counter(page);
           }
-    
+
         </style>
       </head>
       <body>
-      
+
       <header class="section">
       <section class="columns">
-      <div class="column"><p>{{organization.name}}<br />{% if organization.data.info.addition %}{{organization.data.info.addition}}<br />{% endif %}{{organization.data.address.street}}<br />{{organization.data.address.zip}} {{organization.data.address.city}}, {{organization.data.address.country}}</p></div>
+      <div class="column"><p>{{organization.name}}<br />{% if organization.data.info.addition %}{{organization.data.info.addition}}<br />{% endif %}{{organization.data.address.street}}<br />{{organization.data.address.zip}} {{organization.data.address.city}}, {{organization.data.address.country}} </p></div>
         <div class="column has-text-right"><img src="{{organization.data.logo}}" id="logo" /></div>
       </section>
       </header>
       <footer class="section">
         <section class="columns">
-          <div class="column">{{organization.data.columns.first | urlize | safe}}</div>
-          <div class="column">{{organization.data.columns.second | urlize | safe}}</div>
-          <div class="column">{{organization.data.columns.third | urlize | safe}}</div>
+          <div class="column">{{template.data.columns.first or "" | urlize | safe}}</div>
+          <div class="column">{{template.data.columns.second or "" | urlize | safe}}</div>
+          <div class="column">{{template.data.columns.third or "" | urlize | safe}}</div>
         </section>
       </footer>
 
@@ -172,31 +166,30 @@ export default {
       <tbody><tr><td>
         <main class="content">
           <section class="columns section meta">
-           
+
             <div class="column">
-              <p>{{object.client.name}}<br />{{object.client.data.info.addition}}<br />{{object.client.data.contactPerson.fullName}}<br />{{object.client.data.address.street}}</br>{{object.client.data.address.zip}} {{object.client.data.address.city}}<br />{{object.client.data.address.country}}</p>
+              <p>{{document.client.name}}<br />{{document.client.data.info.addition}}<br />  {% if document.client.data.contactPerson %} {{document.client.data.contactPerson.fullName}} {% endif %} <br />{{document.client.data.address.street}}</br>{{document.client.data.address.zip}} {{document.client.data.address.city}}<br /> {% if document.client.data.info.rc %} RC: {{document.client.data.info.rc}}<br /> {% endif %} {% if document.client.data.info.nif %} NIF: {{document.client.data.info.nif}}<br /> {% endif %} {% if document.client.data.info.nis %} NIS: {{document.client.data.info.nis}}<br /> {% endif %} {% if document.client.data.info.ai %} AI: {{document.client.data.info.ai}}<br /> {% endif %} {% if document.client.data.info.tin %} TIN: {{document.client.data.info.tin}}<br /> {% endif %}</p>
             </div>
             <div class="column">
-            <h3>{{t('no')}} {{object.number}}</h3>
+            <h3>{{t('no')}} {{document.number}}</h3>
             <div class="columns">
               <div class="column">
                 <p>{{ t('date') }}<br/>
                 {{ t('due on') }}<br/>
                 </p>
-                
+
               </div>
               <div class="column has-text-right">
-                <p>{{format.date(object.data.date)}}<br />
-                {{format.date(object.data.dueDate)}}<br />
-                {{object.client.data.info.vat}}</p>
+                <p>{{format.date(document.data.date)}}<br />
+                {{format.date(document.data.dueDate)}}<br />
               </div>
               </div>
             </div>
           </section>
         <section class="section content">
-          <h1>{{ t(object.type) }}</h1>
-          {% if object.data.headingText %}
-          <div class="is-together-print">{{object.data.headingText | urlize | safe}}</div>
+          <h1>{{title}}</h1>
+          {% if document.data.headingText %}
+          <div class="is-together-print">{{document.data.headingText | urlize | safe}}</div>
           {% endif %}
           <table class="table is-fullwidth is-narrow positions is-striped">
             <thead>
@@ -209,7 +202,7 @@ export default {
               </tr>
             </thead>
             <tbody>
-              {% for position in object.data.positions %}
+              {% for position in document.data.positions %}
               <tr>
                 <td>{{ loop.index }}.</td>
                 <td><p>{{position.title}}</p><div class="text">{{position.text | safe}}</div></td>
@@ -228,46 +221,45 @@ export default {
                 <tbody>
                   <tr>
                     <td>{{ t('subtotal') }}</td>
-                    <td class="has-text-right">{{format.currency(object.data.netNoDiscount)}}</td>
+                    <td class="has-text-right">{{format.currency(document.data.netNoDiscount)}}</td>
                   </tr>
-                  {% for discountOrCharge in object.data.discountsCharges %}
+                  {% for discountOrCharge in document.data.discountsCharges %}
                   <tr>
                   <td>{{ '-' if discountOrCharge.type == 'discount' else '+' }} {{discountOrCharge.title}}</td>
                   <td class="has-text-right">{{format.currency(discountOrCharge.amount)}}</td>
                   </tr>
                   <tr>
                     <td>{{ t('net') }}</td>
-                    <td class="has-text-right">{{format.currency(object.data.net)}}</td>
+                    <td class="has-text-right">{{format.currency(document.data.net)}}</td>
                   </tr>
                   {%endfor%}
-                  {% for rate,tax in object.data.taxes %}
+                  {% for rate,tax in document.data.taxes %}
                   <tr>
                   <td>{{ t('incl. tax') }} {{rate}}%</td>
                   <td class="has-text-right">{{format.currency(tax)}}</td>
                   </tr>
                   {%endfor%}
-                  
+
                   <tr>
                     <td><h4>{{ t('sum total') }}</h4></td>
-                    <td class="has-text-right"><h4>{{format.currency(object.data.total)}}</h4></td>
+                    <td class="has-text-right"><h4>{{format.currency(document.data.total)}}</h4></td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
-          {% if object.data.footerText %}
+          {% if document.data.footerText %}
           <hr />
-          <div class="is-together-print">{{object.data.footerText | urlize | safe}}</div>
+          <div class="is-together-print">{{document.data.footerText | urlize | safe}}</div>
           {% endif %}
-          <h3>{{t('Payment conditions')}}</h3>
-          <p>{{t('Payment within %d days.', object.data.dueDays)}}</p>
           </section>
         </main>
-  
+
       </td></tr>
       <tfoot><tr><td></td></tr></tfoot>
       </table>
       </body>
     </html>
+
       `,
 }

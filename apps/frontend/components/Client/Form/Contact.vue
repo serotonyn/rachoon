@@ -5,12 +5,10 @@
         <label class="label w-full max-w-xs">
           <span class="label-text">
             Full name
-            <span class="text-red-700">*</span>
           </span>
         </label>
         <input
           type="text"
-          required
           placeholder="Full name"
           v-model="useClient().item.data.contactPerson.fullName"
           class="input input-bordered input-sm w-full max-w-xs"
@@ -26,7 +24,6 @@
         <input
           type="email"
           pattern=".+@.+\..+"
-          required
           placeholder="mail@example.com"
           v-model="useClient().item.data.contactPerson.email"
           class="input input-bordered input-sm w-full max-w-xs"

@@ -166,7 +166,7 @@
           <section class="columns section meta">
 
             <div class="column">
-              <p>{{document.client.name}}<br />{{document.client.data.info.addition}}<br />{{document.client.data.contactPerson.fullName}}<br />{{document.client.data.address.street}}</br>{{document.client.data.address.zip}} {{document.client.data.address.city}}<br /> {% if document.client.data.info.rc %} RC: {{document.client.data.info.rc}}<br /> {% endif %} {% if document.client.data.info.nif %} NIF: {{document.client.data.info.nif}}<br /> {% endif %} {% if document.client.data.info.nis %} NIS: {{document.client.data.info.nis}}<br /> {% endif %} {% if document.client.data.info.ai %} AI: {{document.client.data.info.ai}}<br /> {% endif %} {% if document.client.data.info.tin %} TIN: {{document.client.data.info.tin}}<br /> {% endif %}</p>
+              <p>{{document.client.name}}<br />{{document.client.data.info.addition}}<br />  {% if document.client.data.contactPerson %} {{document.client.data.contactPerson.fullName}} {% endif %} <br />{{document.client.data.address.street}}</br>{{document.client.data.address.zip}} {{document.client.data.address.city}}<br /> {% if document.client.data.info.rc %} RC: {{document.client.data.info.rc}}<br /> {% endif %} {% if document.client.data.info.nif %} NIF: {{document.client.data.info.nif}}<br /> {% endif %} {% if document.client.data.info.nis %} NIS: {{document.client.data.info.nis}}<br /> {% endif %} {% if document.client.data.info.ai %} AI: {{document.client.data.info.ai}}<br /> {% endif %} {% if document.client.data.info.tin %} TIN: {{document.client.data.info.tin}}<br /> {% endif %}</p>
             </div>
             <div class="column">
             <h3>{{t('no')}} {{document.number}}</h3>

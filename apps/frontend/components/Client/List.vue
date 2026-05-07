@@ -47,7 +47,7 @@ const columns = [
       <template #name="{ row }">
         {{ row.name }}
         <br />
-        <small class="opacity-50">{{ row.data.contactPerson.fullName }}</small>
+        <small class="opacity-50">{{ row.data.contactPerson?.fullName }}</small>
       </template>
 
       <template #totalOffers="{ row }">

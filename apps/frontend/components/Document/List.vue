@@ -151,7 +151,7 @@ const columns = [
       <template #client="{ row }">
         {{ row.client.name }}
         <br />
-        <small class="opacity-50">{{ row.client.data.contactPerson.fullName }}</small>
+        <small class="opacity-50">{{ row.client.data.contactPerson?.fullName }}</small>
       </template>
       <template #status="{ row }">
         <div class="tooltip" :data-tip="getStatusTooltip(row)">
