@@ -7,7 +7,11 @@ class Example {
     client.name = "BlueHorizon Data Systems Inc. ";
     client.data = {
       info: {
-        vat: "XX-12345",
+        rc: "",
+        nif: "",
+        nis: "",
+        ai: "",
+        tin: "",
         addition: "",
       },
       contactPerson: {

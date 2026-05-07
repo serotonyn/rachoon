@@ -32,15 +32,59 @@ const controller = () => useClient();
       </div>
       <div>
         <label class="label w-full max-w-xs">
-          <span class="label-text">VAT-Number</span>
+          <span class="label-text">RC</span>
         </label>
         <input
           type="text"
-          placeholder="VAT-Number"
-          v-model="controller().item.data.info.vat"
+          placeholder="RC"
+          v-model="controller().item.data.info.rc"
           class="input input-bordered input-sm w-full max-w-xs"
         />
       </div>
+      <div>
+        <label class="label w-full max-w-xs">
+          <span class="label-text">NIF</span>
+        </label>
+        <input
+          type="text"
+          placeholder="NIF"
+          v-model="controller().item.data.info.nif"
+          class="input input-bordered input-sm w-full max-w-xs"
+        />
+      </div>
+       <div>
+        <label class="label w-full max-w-xs">
+          <span class="label-text">NIS</span>
+        </label>
+        <input
+          type="text"
+          placeholder="NIS"
+          v-model="controller().item.data.info.nis"
+          class="input input-bordered input-sm w-full max-w-xs"
+        />
+      </div>
+      <div>
+        <label class="label w-full max-w-xs">
+          <span class="label-text">AI</span>
+        </label>
+        <input
+          type="text"
+          placeholder="AI"
+          v-model="controller().item.data.info.ai"
+          class="input input-bordered input-sm w-full max-w-xs"
+        />
+      </div> 
+      <div>
+        <label class="label w-full max-w-xs">
+          <span class="label-text">TIN</span>
+        </label>
+        <input
+          type="text"
+          placeholder="TIN"
+          v-model="controller().item.data.info.tin"
+          class="input input-bordered input-sm w-full max-w-xs"
+        />
+      </div> 
     </div>
   </div>
 </template>

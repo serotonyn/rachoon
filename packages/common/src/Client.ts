@@ -3,7 +3,11 @@ import { Helpers } from "./Helpers";
 
 export interface ClientData {
   info: {
-    vat: string;
+    rc: string;
+    nif: string;
+    nis: string;
+    ai: string;
+    tin: string;
     addition: string;
   };
   address: {
@@ -38,7 +42,7 @@ class Client {
   updatedAt: Date = new Date();
   data: ClientData = {
     address: { street: "", zip: "", city: "", country: "" },
-    info: { vat: "", addition: "" },
+    info: { nif: "", nis: "", ai: "", addition: "" },
     contactPerson: { fullName: "", email: "" },
     conditions: {
       earlyPayment: { days: null, discount: null },

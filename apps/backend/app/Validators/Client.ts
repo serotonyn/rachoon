@@ -15,7 +15,11 @@ export default class ClientValidator {
         country: schema.string(),
       }),
       info: schema.object.optional().members({
-        vat: schema.string.optional(),
+        nif: schema.string.optional(),
+        nis: schema.string.optional(),
+        ai: schema.string.optional(),
+        tin: schema.string.optional(),
+        rc: schema.string.optional(),
         addition: schema.string.optional(),
       }),
       contactPerson: schema.object().members({

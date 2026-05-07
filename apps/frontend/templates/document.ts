@@ -182,7 +182,6 @@ export default {
               <div class="column">
                 <p>{{ t('date') }}<br/>
                 {{ t('due on') }}<br/>
-                {{ t('your VAT') }}
                 </p>
                 
               </div>

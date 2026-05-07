@@ -147,7 +147,7 @@
 
       <header class="section">
       <section class="columns">
-      <div class="column"><p>{{organization.name}}<br />{% if organization.data.info.addition %}{{organization.data.info.addition}}<br />{% endif %}{{organization.data.address.street}}<br />{{organization.data.address.zip}} {{organization.data.address.city}}, {{organization.data.address.country}}</p></div>
+      <div class="column"><p>{{organization.name}}<br />{% if organization.data.info.addition %}{{organization.data.info.addition}}<br />{% endif %}{{organization.data.address.street}}<br />{{organization.data.address.zip}} {{organization.data.address.city}}, {{organization.data.address.country}} </p></div>
         <div class="column has-text-right"><img src="{{organization.data.logo}}" id="logo" /></div>
       </section>
       </header>
@@ -166,7 +166,7 @@
           <section class="columns section meta">
 
             <div class="column">
-              <p>{{document.client.name}}<br />{{document.client.data.info.addition}}<br />{{document.client.data.contactPerson.fullName}}<br />{{document.client.data.address.street}}</br>{{document.client.data.address.zip}} {{document.client.data.address.city}}<br />{{document.client.data.address.country}}</p>
+              <p>{{document.client.name}}<br />{{document.client.data.info.addition}}<br />{{document.client.data.contactPerson.fullName}}<br />{{document.client.data.address.street}}</br>{{document.client.data.address.zip}} {{document.client.data.address.city}}<br /> {% if document.client.data.info.rc %} RC: {{document.client.data.info.rc}}<br /> {% endif %} {% if document.client.data.info.nif %} NIF: {{document.client.data.info.nif}}<br /> {% endif %} {% if document.client.data.info.nis %} NIS: {{document.client.data.info.nis}}<br /> {% endif %} {% if document.client.data.info.ai %} AI: {{document.client.data.info.ai}}<br /> {% endif %} {% if document.client.data.info.tin %} TIN: {{document.client.data.info.tin}}<br /> {% endif %}</p>
             </div>
             <div class="column">
             <h3>{{t('no')}} {{document.number}}</h3>
@@ -174,14 +174,12 @@
               <div class="column">
                 <p>{{ t('date') }}<br/>
                 {{ t('due on') }}<br/>
-                {{ t('your VAT') }}
                 </p>
 
               </div>
               <div class="column has-text-right">
                 <p>{{format.date(document.data.date)}}<br />
                 {{format.date(document.data.dueDate)}}<br />
-                {{document.client.data.info.vat}}</p>
               </div>
               </div>
             </div>
@@ -252,8 +250,6 @@
           <hr />
           <div class="is-together-print">{{document.data.footerText | urlize | safe}}</div>
           {% endif %}
-          <h3>{{t('Payment conditions')}}</h3>
-          <p>{{t('Payment within %d days.', document.data.dueDays)}}</p>
           </section>
         </main>
 
