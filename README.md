@@ -1,3 +1,5 @@
+run gotenberg-service (image 7.10) and provide url to GOTENBERG_URL in backend/.env
+
 <div align="center">
 <img src="https://raw.githubusercontent.com/ad-on-is/rachoon/main/apps/frontend/assets/logo.png" height="100" />
 </div>
@@ -136,12 +138,14 @@ rachoon/
 rachoon uses a comprehensive testing setup:
 
 **backend tests (japa)**
+
 ```bash
 cd apps/backend
 pnpm test
 ```
 
 **test structure**
+
 - unit tests for models and services
 - integration tests for api endpoints
 - database seeding for test data
@@ -149,6 +153,7 @@ pnpm test
 **ci/cd pipeline**
 
 all pull requests and pushes trigger automated checks:
+
 - code quality (linting, formatting)
 - test execution with postgres test database
 - build verification
@@ -163,6 +168,7 @@ see [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed testing guidelines.
 we welcome contributions! please read our [contribution guidelines](./CONTRIBUTING.md) to get started.
 
 **quick start:**
+
 1. fork the repository
 2. create a feature branch
 3. make your changes
