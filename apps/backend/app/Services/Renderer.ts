@@ -1,3 +1,4 @@
+import { chromium } from 'playwright'
 import { PDFiumLibrary, PDFiumPageRenderOptions } from '@hyzyla/pdfium'
 import { Locale } from '@repo/common'
 import { Document as CommonDocument } from '@repo/common'
@@ -33,31 +34,59 @@ export default class Renderer {
     const loc = org.settings.general.locale
     const cur = org.settings.general.currency
 
-    const t = (key: string, ...val: any): string => {
-      return Locale.t(loc, key, val)
-    }
-
+    const t = (key: string, ...val: any): string => Locale.t(loc, key, val)
     const currency = (value: any): string => Format.toCurrency(value, loc, cur)
-
     const date = (value: any): string => Format.date(new Date(value), loc)
-
     const longDate = (value: any): string => Format.longDate(new Date(value), loc)
 
-    const title = org.settings[CommonDocument.getTypeString(data.type, true, true)].title
+    const title =
+      org.settings[CommonDocument.getTypeString(data.type, true, true)].title
+
     nunjucks.configure({ autoescape: false })
+
     return nunjucks.renderString(template.html, {
       document: new CommonDocument(data),
-      template: template,
+      template,
       organization: org,
-      title: title,
-      user: user,
-      t: t,
+      title,
+      user,
+      t,
       format: {
-        currency: currency,
-        date: date,
-        longDate: longDate,
+        currency,
+        date,
+        longDate,
       },
     })
+  }
+
+  private static async htmlToPdf(html: string): Promise<Buffer> {
+    const browser = await chromium.launch({
+      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    })
+
+    try {
+      const page = await browser.newPage()
+
+      await page.setContent(html, {
+        waitUntil: 'networkidle',
+      })
+
+      const pdfBuffer = await page.pdf({
+        printBackground: true,
+        preferCSSPageSize: true,
+        margin: {
+          top: '0px',
+          bottom: '0px',
+          left: '0px',
+          right: '0px',
+        },
+        format: undefined, // respects CSS @page size if present
+      })
+
+      return pdfBuffer
+    } finally {
+      await browser.close()
+    }
   }
 
   public static async generatePDFOrImage(
@@ -65,38 +94,29 @@ export default class Renderer {
     isImage: boolean = false,
     downScaleFactor: number = 1
   ): Promise<string[]> {
-    const f = new FormData()
-    f.append('files', new Blob([html], { type: 'text/html' }), 'index.html')
-    f.append('printBackground', 'true')
-    f.append('marginTop', '0')
-    f.append('marginBottom', '0')
-    f.append('marginLeft', '0')
-    f.append('marginRight', '0')
-    f.append('preferCssPageSize', 'true')
-    f.append('generateDocumentOutline', 'true')
-    const res = await fetch(
-      `${process.env.GOTENBERG_URL || 'http://gotenberg'}/forms/chromium/convert/html`,
-      {
-        method: 'POST',
-        body: f,
-      }
-    )
-    const buffer = Buffer.from(await res.arrayBuffer())
+    const pdfBuffer = await this.htmlToPdf(html)
 
-    if (isImage) {
-      const library = await PDFiumLibrary.init()
-      const doc = await library.loadDocument(buffer)
-      const images: any = []
-      for (const page of doc.pages()) {
-        const p = await page.render({
-          scale: 3,
-          render: (options) => this.renderFunction(options, downScaleFactor),
-        })
-        images.push('data:image/png;base64' + ',' + Buffer.from(p.data).toString('base64'))
-      }
-      return images
+    if (!isImage) {
+      return ['data:application/pdf;base64,' + pdfBuffer.toString('base64')]
     }
 
-    return ['data:application/pdf;base64,' + buffer.toString('base64')]
+    const library = await PDFiumLibrary.init()
+    const doc = await library.loadDocument(pdfBuffer)
+
+    const images: string[] = []
+
+    for (const page of doc.pages()) {
+      const p = await page.render({
+        scale: 3,
+        render: (options) => this.renderFunction(options, downScaleFactor),
+      })
+
+      images.push(
+        'data:image/png;base64,' +
+          Buffer.from(p.data).toString('base64')
+      )
+    }
+
+    return images
   }
 }
